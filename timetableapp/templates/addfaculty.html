@@ -1,0 +1,76 @@
+
+{% load static %}
+<html>
+<head>
+    <title>Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="{% static 'home1.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'fontawesome-all.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Exo:700|Changa" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Reem+Kufi&amp;subset=arabic" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="w3-sidebar w3-bar-block w3-top nav1" style="width: 20%; background-color:rgba(0,0,0,0.8); ">
+		<label style="color:white; font-size: 45px; font-family: 'Changa',sans-serif; margin-left: 14%;">
+			<span style="color: #009933; font-size:60px;">M</span>ENU</label>
+		<hr>
+		<a href="/timetableapp/oddevensemselect/" class="w3-bar-item w3-button sidenav " >ODD/EVEN SEM</a><br>
+		<a href="/timetableapp/subjectadded/" class="w3-bar-item w3-button sidenav" >ADD SUBJECTS</a><br>
+		<a href="/timetableapp/facultyadded/" class="w3-bar-item w3-button sidenav" >ADD FACULTIES</a><br>
+		<a href="/timetableapp/loadallocation/" class="w3-bar-item w3-button sidenav" >LOAD ALLOCATION</a>
+	</div>
+	<div style="margin-left: 20%">
+	<h1>
+		<span>T</span>ime -<span>T</span>able <span>G</span>enerator 
+	</h1>
+	<div class="sub-main-w3" id="addfacultiesdiv">
+		<form action="/timetableapp/facultyadded/" method="post" id="addfacultiesform">{% csrf_token %}
+			<div class="form-style-agile">
+				<label>
+					Faculty Name 
+				</label>
+				<input placeholder="Enter Faculty name" name="facname" type="text" required="true">
+				<br><br>
+				<label>
+					Subject Name 
+				</label>
+				<input placeholder="Enter Subject" name="subname" type="text" required="true">
+			</div>
+			<div class="form-style-agile">
+				<input name="th1" id="a1" type="checkbox" onclick="getHours(this)">
+				<span style="color: white; font-size: 16px;">Theory</span>&nbsp;&nbsp;
+				<input name="pract1" id="b1" type="checkbox" onclick="getHours(this)"> 
+				<span style="color: white; font-size: 16px;">Practical</span>
+				<input placeholder="Enter Theory Hours:" name="theoryhours" type="number" min="0" max="1000" id="th1">
+				<input placeholder="Enter Practical Hours:" name="practhours" type="number" min="0" max="1000" id="pract1">
+				<button class="w3-button" value="Add Subject" onclick="addsubject()"></button> 
+			<input type="submit" value="Add Faculty">
+			</div>
+		</form>
+	</div>
+	
+	<script>
+		function getHours(hour) {
+
+			var x=document.getElementById(hour.getAttribute("id"));
+
+			if(x.checked == true)
+			{	
+				document.getElementById(hour.getAttribute("name")).style.display="block";
+				document.getElementById(hour.getAttribute("name")).style.margin="20px 0px 0px 0px";
+			}
+			else
+			{
+				document.getElementById(hour.getAttribute("name")).style.display="none";
+			}
+		}
+	</script>
+    </div>
+    </body>
+</html>
+
