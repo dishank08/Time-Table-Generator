@@ -1,0 +1,125 @@
+{% load static %}
+<html>
+<head>
+    <title>Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="UTF-8" />
+	<link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="{% static 'home1.css' %}" type="text/css">
+	<link rel="stylesheet" href="{% static 'fontawesome-all.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Exo:700|Changa" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Reem+Kufi&amp;subset=arabic" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="w3-sidebar w3-bar-block w3-top nav1" style="width: 20%; background-color:rgba(0,0,0,0.8); ">
+		<label style="color:white; font-size: 45px; font-family: 'Changa',sans-serif; margin-left: 14%;">
+			<span style="color: #009933; font-size:60px;">M</span>ENU</label>
+		<hr>
+		<a href="/timetable_new_app/subjectselect/" class="w3-bar-item w3-button sidenav" >ADD SUBJECTS</a><br>
+		<a href="/timetable_new_app/facultyselect/" class="w3-bar-item w3-button sidenav" >ADD FACULTIES</a><br>
+        <a href="/timetable_new_app/generatetimetable/" class="w3-bar-item w3-button sidenav" >GENERATE</a>
+	</div>
+	<div style="margin-left: 20%">
+	<h1>
+		<span>T</span>ime -<span>T</span>able <span>G</span>enerator 
+	</h1>
+	<div class="sub-main-w3" id="loginformdiv">
+		<form action="/timetable_new_app/loginvalidation/" method="post" id="loginform">{% csrf_token %}
+			<div class="form-style-agile">
+				<label>
+					Username
+				</label>
+				<input placeholder="Username" name="Name" type="text" id="username">
+			</div>
+			<div class="form-style-agile">
+				<label>
+					Password
+				</label>
+				<input placeholder="Password" name="Password" type="password" id="password">
+			</div>
+			<div class="wthree-text">
+				<ul>
+					<li>
+						<a href="#">Forgot Password?</a>
+					</li>
+				</ul>
+			</div>
+			<input type="submit" value="Log In" id="loginbtn" onclick="logintooddeven()">
+			{% if msg %}
+			<h1 style="color: red;font-size: 20px">{{msg}}</h1>
+			{% endif %}
+		</form>
+	</div>
+	<!--<div class="sub-main-w3" id="oddevensemdiv">
+		<form action="" method="post" id="oddevensemform">{% csrf_token %}
+			<div class="form-style-agile">
+				<form action="generation.html" method="post">
+					<input type="submit" value="Odd Semester">
+					<input type="submit" value="Even Semester">
+				</form>
+			</div>
+		</form>
+	</div>
+	<div class="sub-main-w3" id="addsubjectdiv">
+		<form action="" method="post" id="addsubjectform">{% csrf_token %}
+			<div class="form-style-agile">
+				<label>
+					Subject Name 
+				</label>
+				<input placeholder="Enter Subject" name="subname" type="text" required="true">
+				<br><br>
+				<label>
+					Semester 
+				</label>
+				<input placeholder="Enter Semester" name="sem" type="number"  min="1" max="7" required="true">
+			</div>
+			<div class="form-style-agile">
+				<input name="th" id="a" type="checkbox" onclick="getHours(this)">
+				<span style="color: white; font-size: 16px;">Theory</span>&nbsp;&nbsp;
+				<input name="pract" id="b" type="checkbox" onclick="getHours(this)"> 
+				<span style="color: white; font-size: 16px;">Practical</span>
+				<input placeholder="Enter Theory Hours:" name="theoryhours" type="number" min="0" max="1000" id="th">
+				<input placeholder="Enter Practical Hours:" name="practhours" type="number" min="0" max="1000" id="pract"> 
+			<input type="submit" value="Add Subject">
+			</div>
+		</form>
+	</div>-->
+	<script>
+		function getHours(hour) {
+			var x=document.getElementById(hour.getAttribute("id"));
+			if(x.checked == true)
+			{	
+				document.getElementById(hour.getAttribute("name")).style.display="block";
+				document.getElementById(hour.getAttribute("name")).style.margin="20px 0px 0px 0px";
+			}
+			else
+			{
+				document.getElementById(hour.getAttribute("name")).style.display="none";
+			}
+		}
+		function logintooddeven(){
+			document.getElementById("loginformdiv").style.display="none";
+			document.getElementById("oddevensemdiv").style.display="block";
+		}
+        /*$(document).ready(function(){
+           $("#loginbtn").click(function(){
+               var uname = $('#username').val();
+               var passwd = $('#password').val();
+               var token = $("[name=csrfmiddlewaretoken]").val();
+               $.ajax({
+                    type: 'POST',
+                    url:'/loginvalidation/',
+                    data: {uname:uname, passwd:passwd, csrfmiddlewaretoken: token ,
+                    success: function(){
+                        alert("successful");
+                    }
+                })
+           }); 
+        });*/
+	</script>
+    </div>
+    </body>
+</html>
